@@ -1,0 +1,21 @@
+{
+  "appName": "뮤리프",
+  "operatorName": "",
+  "supportEmail": "",
+  "privacyUrl": "",
+  "supportUrl": "",
+  "accountDeletionUrl": "",
+  "bundleId": "com.muleaf.app",
+  "bundleIdConfirmed": false,
+  "releaseScope": "full-service",
+  "contentRightsVerified": false,
+  "privacyDisclosuresReviewed": false,
+  "ageRatingReviewed": false,
+  "moderationProcessVerified": false,
+  "physicalDeviceTested": { "ios": false, "android": false },
+  "storeMetadata": {
+    "name": "뮤리프",
+    "subtitle": "음악을 발견하고 나만의 목록으로",
+    "shortDescription": "음악을 탐색하고, 좋아하는 음악을 찜과 플레이리스트로 정리하세요."
+  }
+}

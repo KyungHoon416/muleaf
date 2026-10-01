@@ -1,0 +1,9 @@
+"use client";
+import { ShieldCheck, Clock3, ArrowUpRight, BadgeCheck } from "lucide-react";
+export type CertifiedTrack = {id:number;title:string;artist:string;art:string;tint?:string;created?:string;certifiedAt?:string;pending?:boolean;tool?:string};
+export const certificateNumber=(id:number)=>`ML-2026-${String(id).padStart(8,"0")}`;
+export function CertificateCard({track,compact=false,onOpen}:{track:CertifiedTrack;compact?:boolean;onOpen?:()=>void}){
+ const issued=track.certifiedAt||"2026. 09. 03";
+ const content=<><div className="certificate-topline"><span className="certificate-brand">muleaf</span><span>MUSIC REGISTRATION</span><ShieldCheck size={18}/></div><div className="certificate-art"><img src={`/art/${track.art}.webp`} className={`cover ${track.tint||""}`} alt={`${track.title} 인증서 앨범 이미지`}/><span className="certificate-state active"><BadgeCheck size={13}/> {track.pending?"접수 확인":"등록 확인"}</span><div className="certificate-art-label"><span>음원 등록 확인서</span><h3>{track.title}</h3><p>{track.artist}</p></div></div><div className="certificate-body"><div className="certificate-id"><span>CERTIFICATE ID</span><strong>{certificateNumber(track.id)}</strong></div>{!compact&&<><dl className="certificate-data"><div><dt>등록 제작자</dt><dd>{track.artist}</dd></div><div><dt>음원 생성일</dt><dd>{track.created?.replaceAll("-",". ")||"2026. 09. 01"}</dd></div><div><dt>인증서 발급일</dt><dd>{issued}</dd></div></dl><div className="certificate-scope"><ShieldCheck size={18}/><p>해당 음원의 서비스 내 등록 정보를 확인합니다. 제작자 표시는 등록 정보에 따릅니다.</p></div></>}<div className="certificate-bottom"><span>ISSUED BY MULEAF</span><span>{compact?<><span>인증서 열기</span><ArrowUpRight size={14}/></>:"MUSIC REGISTRATION"}</span></div></div></>;
+ return compact?<button className={"certificate-card compact active"} onClick={onOpen} aria-label={`${track.title} 인증서 보기`}>{content}</button>:<article className={"certificate-card active"}>{content}</article>;
+}

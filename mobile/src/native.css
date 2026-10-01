@@ -1,0 +1,27 @@
+@import "../../app/globals.css";
+@source "../../app";
+@source "../../components";
+
+html { overscroll-behavior: none; }
+body { padding-top: env(safe-area-inset-top, 0px); padding-left: env(safe-area-inset-left, 0px); padding-right: env(safe-area-inset-right, 0px); }
+button, a { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+.connection-banner { position: sticky; top: 0; z-index: 60; padding: 8px 16px; background: #362946; color: #f4e9ff; font-size: 12px; text-align: center; }
+.safety-center { overflow-y: auto; max-height: 85dvh; }
+.safety-center section { display: grid; gap: 12px; border-top: 1px solid #ffffff20; padding-top: 16px; }
+.safety-center h2 { font-size: 17px; font-weight: 700; }
+.safety-center p, .safety-center li { font-size: 14px; line-height: 1.7; color: #c4bed0; }
+.safety-center ul { padding-left: 20px; list-style: disc; }
+.safety-center li + li { margin-top: 10px; }
+.safety-center summary { cursor: pointer; font-size: 14px; padding: 8px 0; }
+.safety-center a { color: #dab9ff; text-decoration: underline; overflow-wrap: anywhere; }
+.safety-center .safety-notice { background: #32283e; padding: 12px; border-radius: 10px; }
+.safety-center .blocked-artists { list-style: none; padding: 0; }
+.blocked-artists li { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.delete-confirmation { display: flex; flex-wrap: wrap; gap: 12px; }
+.delete-confirmation p { width: 100%; }
+.btn.danger { background: #702d40; color: white; }
+.safety-button { min-width: 44px; min-height: 44px; }
+@media (max-width: 767px) {
+  input, textarea, select { font-size: 16px !important; }
+  .page-content { padding-bottom: calc(175px + env(safe-area-inset-bottom, 0px)); }
+}
