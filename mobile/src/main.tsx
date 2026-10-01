@@ -10,7 +10,7 @@ import { SafetyCenter } from "./safety-center";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "../../components/ui/dialog";
 import "./native.css";
 
-const website = import.meta.env.VITE_PUBLIC_SITE_URL || "https://sori-music-studio.rthhbib.chatgpt.site";
+const website = import.meta.env.VITE_PUBLIC_SITE_URL || "https://muleaf-ed246.web.app";
 const reportsEndpoint = import.meta.env.VITE_REPORTS_API_URL || "";
 
 async function shareTrack(title: string, id: number) {

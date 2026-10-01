@@ -56,20 +56,24 @@ xcodebuild -project ios/App/App.xcodeproj -scheme App \
 
 ## Firebase Hosting
 
-`.env.example`을 `.env.local`로 복사해 사이트 주소와 신고 API를 설정합니다. 클라이언트 환경변수에는 비밀키를 넣지 않습니다. Firebase 프로젝트가 확정되기 전에는 `.firebaserc`를 만들거나 기존 사이트에 배포하지 않습니다.
+운영 주소: https://muleaf-ed246.web.app
+
+이 폴더에서 `npm run deploy:hosting`을 실행하면 타입 검사·웹 빌드 후 지정된 Hosting 사이트에 배포합니다. Firebase CLI 로그인이 필요합니다.
+
+`.env.example`을 `.env.local`로 복사해 사이트 주소와 신고 API를 설정합니다. 클라이언트 환경변수에는 비밀키를 넣지 않습니다. 연결 프로젝트는 `muleaf-ed246`, Hosting 사이트는 `muleaf-ed246`입니다. 기본 공유 주소는 https://muleaf-ed246.web.app 입니다. `.firebaserc`와 `firebase.json`에 배포 대상을 명시했습니다.
 
 ```sh
 npm run build
-firebase hosting:channel:deploy muleaf-preview --project YOUR_FIREBASE_PROJECT_ID
+firebase hosting:channel:deploy muleaf-preview --project muleaf-ed246
 # 프리뷰 확인 후 운영 배포
-firebase deploy --only hosting --project YOUR_FIREBASE_PROJECT_ID
+firebase deploy --only hosting --project muleaf-ed246
 ```
 
 `firebase.json`은 정적 클라이언트 Hosting 설정입니다. **루트의 Cloudflare D1 신고 API를 배포하는 설정이 아닙니다.** Firebase 전환 시 신고 저장 API, 인증, Storage 업로드와 접근 제어를 별도로 연결해야 합니다. `VITE_REPORTS_API_URL`을 설정하지 않으면 앱은 신고를 전송하지 않고 오류를 표시합니다. API는 `POST {id, trackId, reason, detail}`을 받아 실제 저장 후 `{id}`를 반환해야 하며, 입력 검증·남용 방지와 운영 검토 절차가 필요합니다. 허용 origin은 운영 웹사이트, `capacitor://localhost`(iOS), `https://localhost`(Android)로 제한합니다. 현재 웹사이트의 API는 동일 origin만 허용하므로 주소만 넣어 사용할 수 없습니다.
 
 ## 심사 제출 전 필요한 항목
 
-1. Firebase 프로젝트, 운영자명, 고객지원 이메일, 최종 앱 식별자 확인
+1. 운영자명, 고객지원 이메일, 최종 앱 식별자 확인(Firebase Hosting 프로젝트: `muleaf-ed246`)
 2. 실제 로그인·서버 업로드·음원 권한 제어 구현, 예시 데이터를 운영 카탈로그로 교체
 3. 회원 기능을 제공한다면 계정 삭제, 개인정보 처리방침·이용약관·지원 URL 마련
 4. 음원 배포 권리 확인, 신고 저장·운영 검토·사용자 차단 등 업로드 콘텐츠 운영 기능 완성
