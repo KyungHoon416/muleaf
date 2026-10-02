@@ -81,3 +81,17 @@ test("local data deletion requires confirmation and removes collections and bloc
   expect(await page.evaluate(() => JSON.parse(localStorage.getItem("muleaf-library-v1")!).playlist)).toEqual([]);
   await page.screenshot({ path: "artifacts/empty-library-after-deletion.png" });
 });
+
+test("social buttons report missing server setup without a false login", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("button", { name: "로그인", exact: true }).click();
+  for (const label of ["네이버로 시작하기", "카카오로 시작하기", "Google로 시작하기", "Apple로 시작하기"]) {
+    await page.getByRole("button", { name: label, exact: true }).click();
+    await expect(page.getByRole("alert")).toContainText("인증 서버와 서비스 등록 정보 연결 후");
+    await expect(page.getByRole("dialog")).toBeVisible();
+  }
+  await page.keyboard.press("Escape");
+  await expect(page.getByRole("button", { name: "로그인", exact: true })).toBeVisible();
+  await page.reload();
+  await expect(page.getByRole("button", { name: "내 계정", exact: true })).toHaveCount(0);
+});

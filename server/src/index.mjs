@@ -1,0 +1,11 @@
+import { createServer } from 'node:http';
+import { mkdirSync } from 'node:fs';
+import { dirname } from 'node:path';
+import { createAuthServer } from './app.mjs';
+const env=process.env;
+mkdirSync(dirname(env.DATABASE_PATH||'data/auth.sqlite'),{recursive:true,mode:0o700});
+const {handler,db}=createAuthServer(env);
+const server=createServer((req,res)=>{handler(req,res).catch(()=>{if(!res.headersSent)res.writeHead(500);res.end();});});
+server.requestTimeout=15000;server.headersTimeout=10000;
+server.listen(Number(env.PORT||8080),env.HOST||'127.0.0.1',()=>console.log('Muleaf authentication server listening'));
+for(const signal of ['SIGINT','SIGTERM'])process.on(signal,()=>server.close(()=>{db.close();process.exit(0);}));

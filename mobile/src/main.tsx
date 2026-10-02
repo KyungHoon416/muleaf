@@ -5,6 +5,7 @@ import { App } from "@capacitor/app";
 import { Network } from "@capacitor/network";
 import { Share } from "@capacitor/share";
 import { ThemeProvider } from "next-themes";
+import { useSocialAuth } from "./use-social-auth";
 import SoriApp from "../../app/sori-app";
 import { SafetyCenter } from "./safety-center";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "../../components/ui/dialog";
@@ -25,6 +26,7 @@ async function shareTrack(title: string, id: number) {
 }
 
 function MobileApp() {
+  const auth = useSocialAuth();
   const [offline, setOffline] = useState(!navigator.onLine);
   const [safetyOpen, setSafetyOpen] = useState(false);
   const [pendingBlock, setPendingBlock] = useState<string | null>(null);
@@ -76,7 +78,7 @@ function MobileApp() {
   return <ThemeProvider attribute="class" forcedTheme="dark">
     {offline && <div className="connection-banner" role="status">{Capacitor.isNativePlatform() ? "오프라인 · 앱에 포함된 미리듣기는 계속 이용할 수 있어요" : "오프라인 · 인터넷 연결을 확인해 주세요"}</div>}
     {safetyError && <div className="connection-banner" role="alert">{safetyError}</div>}
-    <SoriApp key={resetVersion} mobile={{ shareTrack, reportsEndpoint, localLibrary: true, blockedArtists,
+    <SoriApp key={resetVersion} auth={auth} mobile={{ shareTrack, reportsEndpoint, localLibrary: true, blockedArtists,
       onBlockArtist: artist => { setSafetyError(""); setPendingBlock(artist); }, openSafety: () => setSafetyOpen(true) }} />
     <SafetyCenter open={safetyOpen} onOpenChange={setSafetyOpen} blockedArtists={blockedArtists}
       onUnblock={artist => updateBlocked(blockedArtists.filter(value => value !== artist))}
