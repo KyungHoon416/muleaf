@@ -52,7 +52,7 @@ git clone muleaf.bundle muleaf
 
 ## 연결이 필요한 부분
 
-Firestore 데이터베이스와 서버 전용 접근 규칙은 설정되었습니다. 자체 SNS OAuth 서버는 Cloud Functions 배포와 제공업체 키 연결이 남아 있습니다. Firebase Authentication은 사용하지 않습니다. 세부 설정은 [server/README.md](server/README.md)를 참고하세요. AdSense는 연결되지 않았습니다. 회원 전용 화면은 비로그인 시 로그인 화면으로 연결됩니다.
+Firestore 데이터베이스와 서버 전용 접근 규칙은 설정되었습니다. 자체 SNS OAuth 서버를 Cloud Functions에 배포하고 Google 웹 로그인 키를 연결했습니다. 네이버·카카오·Apple은 추가 설정이 필요합니다. Firebase Authentication은 사용하지 않습니다. 세부 설정은 [server/README.md](server/README.md)를 참고하세요. AdSense는 연결되지 않았습니다. 회원 전용 화면은 비로그인 시 로그인 화면으로 연결됩니다.
 차트·통계는 초기 데이터이며, 찜과 플레이리스트 등은 브라우저 실행 상태입니다. 업로드는 서버 저장 연동이 필요합니다. 로그인 상태의 전체 듣기 분기는 구현되어 있으나 실제 인증 연동은 별도입니다. 원본 음원이 public에 있으므로 상용 서비스에서는 인증된 서버/서명 URL로 원본 전달을 제한해야 합니다.
 
 등록 확인서는 서비스 등록 기록을 표시하며 법적 저작권 등록이나 NFT 발행 기능은 구현되어 있지 않습니다.

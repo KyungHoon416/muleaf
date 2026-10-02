@@ -17,7 +17,7 @@
     "release:check:online": "node scripts/release-check.mjs --online",
     "build:store": "npm run release:check && npm run sync",
     "test:release": "node --test tests/release-check.test.mjs",
-    "deploy:hosting": "npm run typecheck && npm run build && firebase deploy --config ../firebase.json --only hosting --project muleaf-ed246"
+    "deploy:hosting": "npm run typecheck && VITE_AUTH_ENABLED=true npm run build && firebase deploy --config ../firebase.json --only hosting --project muleaf-ed246"
   },
   "dependencies": {
     "@base-ui/react": "1.8.0",

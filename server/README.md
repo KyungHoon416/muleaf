@@ -9,7 +9,7 @@ Firebase Authentication 없이 Google·네이버·카카오·Apple OAuth를 직�
 
 ## 현재 상태 (2026-10-02)
 
-Firestore는 muleaf-ed246의 서울 리전에 생성했고 삭제 보호를 켰다. 클라이언트의 모든 직접 읽기·쓰기를 차단하는 규칙을 배포했다. Cloud Functions/Hosting API 연결은 아직 배포하지 않았다. 현재 Spark 요금제이므로 함수 배포 전에 사용자가 Blaze 결제 설정을 완료해야 한다. 제공업체 키도 아직 연결되지 않았다. Firestore TTL 색인 설정은 저장소에 준비되어 있고 아직 배포하지 않았다.
+Firestore는 muleaf-ed246의 서울 리전에 생성했고 삭제 보호를 켰다. 클라이언트의 모든 직접 읽기·쓰기를 차단하는 규칙을 배포했다. Cloud Functions `socialAuth`와 Firestore TTL 색인을 배포했다. Secret Manager의 서버 설정에는 Google OAuth 클라이언트 정보가 연결되어 있고, 세션 API가 Google 제공업체 활성 상태를 반환하는 것을 확인했다. 네이버·카카오·Apple은 아직 키가 연결되지 않았다. 빌드 이미지는 30일 후 정리하도록 설정했다. 실제 사용자 Google 인증 완료·계정 삭제 검증은 별도다.
 
 ## 데이터와 접근
 

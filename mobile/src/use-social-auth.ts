@@ -20,6 +20,14 @@ export function useSocialAuth(): SocialAuth {
   const [providers, setProviders] = useState<string[]>([]);
   const csrf = useRef(""); const lock = useRef(false);
   useEffect(() => {
+    // OAuth cancellation via browser Back can restore the page from BFCache.
+    const restore = (event: PageTransitionEvent) => {
+      if (event.persisted) { lock.current = false; setBusy(false); }
+    };
+    window.addEventListener("pageshow", restore);
+    return () => window.removeEventListener("pageshow", restore);
+  }, []);
+  useEffect(() => {
     let disposed = false;
     const url = new URL(location.href), code = url.searchParams.get("auth_error");
     if(code){setError(messages[code]||messages.login_failed);url.searchParams.delete("auth_error");history.replaceState(null,"",url.pathname+url.search+url.hash);}

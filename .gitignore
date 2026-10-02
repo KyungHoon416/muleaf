@@ -54,3 +54,6 @@ next-env.d.ts
 
 # Firestore emulator output
 firestore-debug.log*
+
+# Firebase deployment cache
+.firebase/
