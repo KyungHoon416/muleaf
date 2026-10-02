@@ -51,3 +51,6 @@ next-env.d.ts
 /.codex/
 /outputs/
 /work/
+
+# Firestore emulator output
+firestore-debug.log*

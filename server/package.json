@@ -1,1 +1,19 @@
-{"name":"muleaf-auth-server","version":"0.1.0","private":true,"type":"module","engines":{"node":">=24.0.0"},"scripts":{"start":"node --env-file=.env src/index.mjs","test":"node --test test/*.test.mjs"},"dependencies":{"jose":"^6.1.0"}}
+{
+  "name": "muleaf-auth-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "22"
+  },
+  "scripts": {
+    "start": "node --env-file=.env src/index.mjs",
+    "test": "node --test test/*.test.mjs"
+  },
+  "dependencies": {
+    "firebase-admin": "14.5.0",
+    "firebase-functions": "7.4.0",
+    "jose": "^6.1.0"
+  },
+  "main": "src/functions.mjs"
+}

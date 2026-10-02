@@ -60,16 +60,16 @@ xcodebuild -project ios/App/App.xcodeproj -scheme App \
 
 이 폴더에서 `npm run deploy:hosting`을 실행하면 타입 검사·웹 빌드 후 지정된 Hosting 사이트에 배포합니다. Firebase CLI 로그인이 필요합니다.
 
-`.env.example`을 `.env.local`로 복사해 사이트 주소와 신고 API를 설정합니다. 클라이언트 환경변수에는 비밀키를 넣지 않습니다. 연결 프로젝트는 `muleaf-ed246`, Hosting 사이트는 `muleaf-ed246`입니다. 기본 공유 주소는 https://muleaf-ed246.web.app 입니다. `.firebaserc`와 `firebase.json`에 배포 대상을 명시했습니다.
+`.env.example`을 `.env.local`로 복사해 사이트 주소와 신고 API를 설정합니다. 클라이언트 환경변수에는 비밀키를 넣지 않습니다. 연결 프로젝트는 `muleaf-ed246`, Hosting 사이트는 `muleaf-ed246`입니다. 기본 공유 주소는 https://muleaf-ed246.web.app 입니다. 저장소 루트의 `.firebaserc`와 `firebase.json`에 통합 배포 대상을 명시했습니다.
 
 ```sh
 npm run build
-firebase hosting:channel:deploy muleaf-preview --project muleaf-ed246
+firebase hosting:channel:deploy muleaf-preview --config ../firebase.json --project muleaf-ed246
 # 프리뷰 확인 후 운영 배포
-firebase deploy --only hosting --project muleaf-ed246
+firebase deploy --config ../firebase.json --only hosting --project muleaf-ed246
 ```
 
-`firebase.json`은 정적 클라이언트 Hosting 설정입니다. **루트의 Cloudflare D1 신고 API를 배포하는 설정이 아닙니다.** Firebase 전환 시 신고 저장 API, 인증, Storage 업로드와 접근 제어를 별도로 연결해야 합니다. `VITE_REPORTS_API_URL`을 설정하지 않으면 앱은 신고를 전송하지 않고 오류를 표시합니다. API는 `POST {id, trackId, reason, detail}`을 받아 실제 저장 후 `{id}`를 반환해야 하며, 입력 검증·남용 방지와 운영 검토 절차가 필요합니다. 허용 origin은 운영 웹사이트, `capacitor://localhost`(iOS), `https://localhost`(Android)로 제한합니다. 현재 웹사이트의 API는 동일 origin만 허용하므로 주소만 넣어 사용할 수 없습니다.
+루트 `firebase.json`은 Hosting, 자체 OAuth Cloud Functions, Firestore 설정을 포함합니다. `/api/auth/**`는 서울 리전의 `socialAuth` 함수로 연결되므로 함수 배포 후 Hosting을 배포합니다. **루트의 Cloudflare D1 신고 API를 배포하는 설정이 아닙니다.** Firebase 전환 시 신고 저장 API, 인증, Storage 업로드와 접근 제어를 별도로 연결해야 합니다. `VITE_REPORTS_API_URL`을 설정하지 않으면 앱은 신고를 전송하지 않고 오류를 표시합니다. API는 `POST {id, trackId, reason, detail}`을 받아 실제 저장 후 `{id}`를 반환해야 하며, 입력 검증·남용 방지와 운영 검토 절차가 필요합니다. 허용 origin은 운영 웹사이트, `capacitor://localhost`(iOS), `https://localhost`(Android)로 제한합니다. 현재 웹사이트의 API는 동일 origin만 허용하므로 주소만 넣어 사용할 수 없습니다.
 
 ## 심사 제출 전 필요한 항목
 
