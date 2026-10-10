@@ -8,7 +8,18 @@ const root = fileURLToPath(new URL("..", import.meta.url));
 const pkg = JSON.parse(readFileSync(new URL("package.json", import.meta.url), "utf8"));
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [react(), tailwindcss(), {
+    name: "muleaf-web-adsense",
+    // Hosting opts in; native app and local test builds do not load web ads.
+    transformIndexHtml() {
+      if (process.env.MULEAF_WEB_ADSENSE !== "true") return [];
+      return [{ tag: "script", attrs: {
+        async: true,
+        src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4004046235562178",
+        crossorigin: "anonymous",
+      }, injectTo: "head" as const }];
+    },
+  }],
   publicDir: false,
   css: { postcss: { plugins: [] } },
   resolve: {
