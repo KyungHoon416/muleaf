@@ -1,6 +1,6 @@
 {
   "appName": "뮤리프",
-  "operatorName": "",
+  "operatorName": "해답(HaeDab)",
   "supportEmail": "",
   "privacyUrl": "",
   "supportUrl": "",
@@ -12,7 +12,10 @@
   "privacyDisclosuresReviewed": false,
   "ageRatingReviewed": false,
   "moderationProcessVerified": false,
-  "physicalDeviceTested": { "ios": false, "android": false },
+  "physicalDeviceTested": {
+    "ios": false,
+    "android": false
+  },
   "storeMetadata": {
     "name": "뮤리프",
     "subtitle": "음악을 발견하고 나만의 목록으로",

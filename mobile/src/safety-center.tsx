@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "../../components/ui/dialog";
 import { config, policySections, communityRules, operatorConfigured } from "./policy-content";
+import { LegalDocument, legalTitles } from "../../app/legal/document";
 
 type Props = {
   open: boolean;
@@ -20,7 +21,11 @@ export function SafetyCenter({ open, onOpenChange, blockedArtists, onUnblock, on
         <h2 id="privacy-title">개인정보 처리 안내</h2>
         {!operatorConfigured && <p className="safety-notice">개발 버전 안내입니다. 운영자·연락처·보관 기간이 확정되기 전에는 정식 개인정보 처리방침으로 사용할 수 없습니다.</p>}
         {policySections.map(section => <details key={section.title}><summary>{section.title}</summary><p>{section.text}</p></details>)}
+        <details><summary>개인정보처리방침 전문 (초안)</summary><LegalDocument index={1}/></details>
         {config.privacyUrl && <a href={config.privacyUrl} target="_blank" rel="noopener noreferrer">전체 개인정보 처리방침</a>}
+      </section>
+      <section><h2>이용약관 및 선택 동의 안내</h2>
+        {[0, 2, 3].map(index => <details key={index}><summary>{legalTitles[index]} (초안)</summary><LegalDocument index={index}/></details>)}
       </section>
       <section><h2>커뮤니티 이용 규칙</h2><ul>{communityRules.map(rule => <li key={rule}>{rule}</li>)}</ul></section>
       <section><h2>차단한 아티스트</h2><p>차단은 이 기기에 적용됩니다. 차단한 아티스트의 음악은 재생되지 않습니다.</p>
