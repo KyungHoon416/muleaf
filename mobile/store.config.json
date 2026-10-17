@@ -1,7 +1,7 @@
 {
   "appName": "뮤리프",
   "operatorName": "해답(HaeDab)",
-  "supportEmail": "",
+  "supportEmail": "haedabmkt@gmail.com",
   "privacyUrl": "",
   "supportUrl": "",
   "accountDeletionUrl": "",
@@ -20,5 +20,8 @@
     "name": "뮤리프",
     "subtitle": "음악을 발견하고 나만의 목록으로",
     "shortDescription": "음악을 탐색하고, 좋아하는 음악을 찜과 플레이리스트로 정리하세요."
-  }
+  },
+  "operatorAddress": "서울특별시 강동구 성내로3가길 7, 204호(성내동)",
+  "supportPhone": "0507-1434-1945",
+  "representative": "대표이사 권혁준"
 }
