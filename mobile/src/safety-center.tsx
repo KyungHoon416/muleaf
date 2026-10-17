@@ -19,7 +19,7 @@ export function SafetyCenter({ open, onOpenChange, blockedArtists, onUnblock, on
       <DialogHeader><DialogTitle>개인정보 및 안전</DialogTitle><DialogDescription>저장 데이터, 차단 목록, 고객지원 정보를 관리하세요.</DialogDescription></DialogHeader>
       <section aria-labelledby="privacy-title">
         <h2 id="privacy-title">개인정보 처리 안내</h2>
-        <p className="safety-notice">{operatorConfigured ? "운영자와 문의처를 등록했습니다. 개인정보 보호책임자·시행일·처리 운영정보는 아직 확정 중이며, 아래 전문은 초안입니다." : "개발 버전 안내입니다. 운영자·연락처·보관 기간이 확정되기 전에는 정식 개인정보 처리방침으로 사용할 수 없습니다."}</p>
+        <p className="safety-notice">{operatorConfigured ? "개인정보 보호책임자: 권혁준 대표이사. 공고일·시행일: 2026년 10월 17일. 실제 서버 설정을 반영했으며 계약·국외이전·문의 보유기간 등 확인이 필요한 항목은 초안에 표시했습니다." : "개발 버전 안내입니다. 운영자·연락처·보관 기간이 확정되기 전에는 정식 개인정보 처리방침으로 사용할 수 없습니다."}</p>
         {policySections.map(section => <details key={section.title}><summary>{section.title}</summary><p>{section.text}</p></details>)}
         <details><summary>개인정보처리방침 전문 (초안)</summary><LegalDocument index={1}/></details>
         {config.privacyUrl && <a href={config.privacyUrl} target="_blank" rel="noopener noreferrer">전체 개인정보 처리방침</a>}
