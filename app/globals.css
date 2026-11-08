@@ -73,3 +73,12 @@ body{font-family:"Apple SD Gothic Neo","Malgun Gothic",Arial,sans-serif}.app-mai
 
 /* Full operator-provided legal documents, including accessible wide tables. */
 .legal-links{display:flex;flex-wrap:wrap;gap:10px 18px;flex-basis:100%}.legal-links button{font-size:12px;text-decoration:underline;text-underline-offset:3px}.legal-dialog{width:min(920px,calc(100vw - 32px))!important;max-width:920px!important;max-height:85dvh}.legal-dialog .terms-body{overflow-y:auto;min-height:0;max-height:65dvh}.legal-document{font-size:14px;line-height:1.85;overflow-wrap:anywhere;text-align:left}.legal-document h3{margin:26px 0 10px;font-size:17px;color:#f0e6ff}.legal-document p{margin:12px 0;white-space:pre-wrap}.legal-draft-notice{padding:16px;border:1px solid #9e8654;border-radius:10px;background:#30291c;color:#f3dfb4;margin:0 0 22px}.legal-draft-notice p{font-size:13px}.legal-table-scroll{overflow-x:auto;margin:16px 0}.legal-document table{width:100%;border-collapse:collapse;min-width:420px}.legal-document th,.legal-document td{padding:10px 12px;border:1px solid #454052;vertical-align:top;white-space:pre-wrap}.legal-document th{background:#282333}.page-footer{flex-wrap:wrap}.safety-center .legal-document{padding-top:16px}
+
+/* Ad layout preview is local content, never an empty network ad frame. */
+.ad-slot.ad-demo{display:block;min-height:0;padding:44px 24px 24px;background:linear-gradient(120deg,#241c31,#17151f);border:1px solid #453452;text-align:left}
+.ad-demo-content{display:flex;align-items:center;gap:28px}
+.ad-demo-brand{font-size:36px;font-weight:800;letter-spacing:-2px;color:#dcc3ff}
+.ad-demo-content strong{font-size:20px;color:#f3eafa;line-height:1.5}
+.ad-demo-content p{font-size:14px;color:#c6bbd0;margin:6px 0}
+.ad-demo-content small{display:block;font-size:12px;color:#a99bb5;line-height:1.6}
+@media(max-width:640px){.ad-slot.ad-demo{padding:42px 18px 20px}.ad-demo-content{align-items:flex-start;flex-direction:column;gap:12px}.ad-demo-brand{font-size:28px}.ad-demo-content strong{font-size:18px}}

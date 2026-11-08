@@ -1,33 +1,14 @@
-import { useEffect, useRef } from "react";
-
 type AdPlacement = "discover-side" | "track-detail" | "certificate-detail" | `${"discover" | "charts" | "library" | "dashboard" | "upload"}-footer`;
-declare global {
- interface Window { adsbygoogle?: { push: (ad: Record<string, unknown>) => unknown }; }
-}
-/** Web-only AdSense unit. Test requests stay enabled until a separate live launch. */
+
+// Layout preview only. Keep the existing AdSense unit (3400909051) in the
+// account, but do not request Google ads while publisher content is under review.
 export function AdSlot({placement,format="banner"}:{placement:AdPlacement;format?:"banner"|"rectangle"}) {
- const eligible = placement === "discover-side" || ["discover-footer", "charts-footer", "library-footer"].includes(placement);
- const ad = useRef<HTMLModElement>(null);
- const requested = useRef(false);
- useEffect(() => {
-  const element = ad.current;
-  if (!element || !document.querySelector('script[src*="adsbygoogle.js?client=ca-pub-4004046235562178"]')) return;
-  const request = () => {
-   if (requested.current || element.hasAttribute("data-adsbygoogle-status") || element.getBoundingClientRect().width <= 0) return;
-   requested.current = true;
-   try { (window.adsbygoogle ||= [] as Record<string, unknown>[]).push({}); } catch { /* Keep the surrounding music UI usable if ads are blocked. */ }
-  };
-  const observer = new ResizeObserver(request);
-  observer.observe(element);
-  request();
-  return () => observer.disconnect();
- }, [eligible]);
- // Keep ad requests out of dialogs and unfinished account/upload screens.
- if (!eligible) return null;
- return <aside className={`ad-slot ad-${format}`} aria-label="광고" data-ad-placement={placement} style={{display:"block",padding:"36px 12px 12px"}}>
-  <span className="ad-label">광고</span>
-  <ins ref={ad} className="adsbygoogle" style={{display:"block",width:"100%"}}
-   data-ad-client="ca-pub-4004046235562178" data-ad-slot="3400909051"
-   data-ad-format="auto" data-full-width-responsive="true" data-adtest="on" />
+ if (placement !== "discover-side") return null;
+ return <aside className={`ad-slot ad-${format} ad-demo`} aria-label="테스트 광고 미리보기" data-ad-placement={placement}>
+  <span className="ad-label">테스트 광고 · 실제 광고 아님</span>
+  <div className="ad-demo-content">
+   <span className="ad-demo-brand" aria-hidden="true">muleaf</span>
+   <div><strong>당신의 다음 소리를 만나세요.</strong><p>마음에 드는 음악을 듣고 나만의 보관함에 담아보세요.</p><small>화면 배치를 확인하는 자체 샘플입니다. 광고 노출·클릭은 집계되지 않습니다.</small></div>
+  </div>
  </aside>;
 }

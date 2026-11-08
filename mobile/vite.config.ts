@@ -10,13 +10,12 @@ const pkg = JSON.parse(readFileSync(new URL("package.json", import.meta.url), "u
 export default defineConfig({
   plugins: [react(), tailwindcss(), {
     name: "muleaf-web-adsense",
-    // Hosting opts in; native app and local test builds do not load web ads.
+    // Verify site ownership without enabling Auto ads on unfinished SPA screens.
     transformIndexHtml() {
-      if (process.env.MULEAF_WEB_ADSENSE !== "true") return [];
-      return [{ tag: "script", attrs: {
-        async: true,
-        src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4004046235562178",
-        crossorigin: "anonymous",
+      if (process.env.MULEAF_ADSENSE_VERIFY !== "true") return [];
+      return [{ tag: "meta", attrs: {
+        name: "google-adsense-account",
+        content: "ca-pub-4004046235562178",
       }, injectTo: "head" as const }];
     },
   }],
